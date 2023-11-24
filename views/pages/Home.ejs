@@ -1,12 +1,89 @@
 <%- include('../Header'); -%>
-    <section>
-        <h1>Bloom</h1>
-        <p>
-            A powerful and flexible blog management system that helps you grow your online presence. Bloom is designed
-            to help you create engaging and informative blogs that attract and retain your audience. Bloom offers advanced
-            features such as content scheduling, collaboration, analytics, and monetization. Bloom also allows you to
-            connect your blog with other platforms and services, such as email marketing, e-commerce, and social media.
-            Bloom is the blog management system that helps you bloom your business.
-        </p>
-    </section>
-<%- include('../Footer'); -%>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Bloom Logo">
+        </div>
+        <div class="nav">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Features</a></li>
+                <li><a href="#">Pricing</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+        <div class="auth">
+            <button>Login</button>
+            <button>Register</button>
+        </div>
+    </header>
+    <main>
+        <section class="intro">
+            <div class="container">
+                <h1>A powerful and flexible blog management system that helps you grow your online presence.</h1>
+                <p>Bloom is designed to help you create engaging and informative blogs that attract and retain your
+                    audience. Bloom offers advanced features such as content scheduling, collaboration, analytics, and
+                    monetization. Bloom also allows you to connect your blog with other platforms and services, such as
+                    email marketing, e-commerce, and social media.</p>
+                <button>Start your free trial</button>
+            </div>
+        </section>
+        <section class="features">
+            <div class="container">
+                <h2>Why choose Bloom?</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <img src="feature1.png" alt="Feature 1">
+                        <h3>Content Scheduling</h3>
+                        <p>Plan and schedule your posts ahead of time and publish them automatically at the best time
+                            for your audience.</p>
+                    </div>
+                    <div class="feature-item">
+                        <img src="feature2.png" alt="Feature 2">
+                        <h3>Collaboration</h3>
+                        <p>Invite your team members and contributors to work together on your blog. Assign roles and
+                            permissions and track changes and revisions.</p>
+                    </div>
+                    <div class="feature-item">
+                        <img src="feature3.png" alt="Feature 3">
+                        <h3>Analytics</h3>
+                        <p>Measure and optimize your blog performance with insightful data and reports. Learn more about
+                            your audience, traffic, engagement, and revenue.</p>
+                    </div>
+                    <div class="feature-item">
+                        <img src="feature4.png" alt="Feature 4">
+                        <h3>Monetization</h3>
+                        <p>Turn your blog into a source of income with various monetization options. Display ads, sell
+                            products, accept donations, or offer subscriptions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="testimonials">
+            <div class="container">
+                <h2>What our customers say</h2>
+                <div class="testimonial-list">
+                    <div class="testimonial-item">
+                        <img src="customer1.png" alt="Customer 1">
+                        <p>"Bloom has helped me take my blog to the next level. I love how easy it is to manage and
+                            update my content, and how I can connect with my readers and grow my audience."</p>
+                        <span>- Alice, Lifestyle Blogger</span>
+                    </div>
+                    <div class="testimonial-item">
+                        <img src="customer2.png" alt="Customer 2">
+                        <p>"Bloom is the best blog management system I have ever used. It has everything I need to run a
+                            successful blog, from scheduling to analytics to monetization. I highly recommend it to
+                            anyone who wants to start or grow their blog."</p>
+                        <span>- Bob, Tech Blogger</span>
+                    </div>
+                    <div class="testimonial-item">
+                        <img src="customer3.png" alt="Customer 3">
+                        <p>"Bloom is a game-changer for bloggers. It has made my blogging experience so much easier and
+                            more enjoyable. I can focus on creating quality content and engaging with my audience, while
+                            Bloom takes care of the rest."</p>
+                        <span>- Carol, Travel Blogger</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <%- include('../Footer'); -%>

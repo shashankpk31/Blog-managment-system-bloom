@@ -3,7 +3,7 @@ const user = require("../model/user");
 const router=express.Router();
 
 router.get('/login',(req,res)=>{
-    res.render('./pages/login');
+    res.render('./pages/Login');
 })
 
 router.post('/login',(req,res)=>{
