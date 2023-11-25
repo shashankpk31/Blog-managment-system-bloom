@@ -1,13 +1,26 @@
-const express =require("express");
+const express = require('express');
+const {
+  register,
+  login,
+  logout,
+  getMe,
+  forgotPassword,
+  resetPassword,
+  updateDetails,
+  updatePassword,
+  confirmEmail,
+} = require('../controllers/auth');
 const user = require("../model/user");
 const router=express.Router();
+const { protect } = require('../middleware/auth');
 
 router.get('/login',(req,res)=>{
     res.render('./pages/Login');
 })
 
 router.post('/login',(req,res)=>{
-    
+    console.log(req.body);
+    res.redirect('./welcome');
 })
 
 router.get('/registeruser',(req,res)=>{
@@ -15,10 +28,23 @@ router.get('/registeruser',(req,res)=>{
 })
 
 router.post('/registeruser',(req,res)=>{
-    const newUser=new user(req.body);
-    newUser.save();
-    req.body={};
+    console.log(req.body);
     res.redirect('./login');
 })
+
+router.get('/resetPassword',(req,res)=>{
+    res.render('./pages/forgotPassword'); 
+})
+
+router.post('/resetPassword',(req,res)=>{
+    console.log(req.body);
+    res.redirect('./login');
+})
+
+
+router.get('/welcome',(req,res)=>{
+    res.render('./pages/Welcome'); 
+})
+
 
 module.exports=router;

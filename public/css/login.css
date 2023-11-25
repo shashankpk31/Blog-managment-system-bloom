@@ -1,0 +1,97 @@
+/* Add your CSS styles here */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+.container {
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo img {
+    width: 200px;
+    height: auto;
+}
+
+.login-card {
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 40px;
+}
+
+.login-card h2 {
+    text-align: center;
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+.login-card form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-card form input {
+    width: 80%;
+    max-width: 400px;
+    height: 40px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    font-size: 16px;
+}
+
+.login-card form input:focus {
+    outline: none;
+    border-color: #999999;
+}
+
+.login-card form button {
+    width: 80%;
+    max-width: 400px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333333;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.login-card form button:hover {
+    background-color: #444444;
+}
+
+.login-card form p {
+    text-align: center;
+    color: #666666;
+    margin: 10px;
+}
+
+.login-card form p a {
+    color: #333333;
+    text-decoration: none;
+}
+
+.login-card form p a:hover {
+    text-decoration: underline;
+}
