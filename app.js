@@ -24,6 +24,13 @@ connectDB();
 // for data urlencoded 
 app.use(express.urlencoded({ extended: false }))
 
+//  to save or store some information in the session
+// app.use(session({
+//     secret: process.env.SECRET,
+//     resave: false,
+//     saveUninitialized: false
+// }));
+
 // to use template engine to render against a get request
 app.set('view engine', 'ejs');
 
@@ -57,12 +64,12 @@ app.use(helmet());
 app.use(xss());
 
 // Rate limiting
+app.set('trust proxy', true);
 const limiter = rateLimit({
     windowMs: 10 * 60 * 1000, // 10 mins
     max: 100
 });
 app.use(limiter);
-
 // Prevent http param pollution
 app.use(hpp());
 
