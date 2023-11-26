@@ -8,14 +8,14 @@ const User = require('../model/user');
 // @route     POST /api/v1/auth/register
 // @access    Public
 exports.register = asyncHandler(async (req, res, next) => {
-  const { username, Name, Phone_no, Email, Password,
-    DOB, Gender, Occupation, role } = req.body;
+  const { username, name, phone_no, email, password,
+    dob, gender, occupation } = req.body;
 
   // Create user
   const user = await User.create({
-    username, Name, Phone_no, Email, Password,
-    Gender, Occupation, role,
-    DOB: new Date(DOB.substring(3, 5) + "-" + DOB.substring(0, 2) + "-" + DOB.substring(6))
+    username, name, phone_no, email, password,
+    gender, occupation,
+    dob: new Date(dob)
   });
 
   // grab token and send to email
@@ -26,13 +26,13 @@ exports.register = asyncHandler(async (req, res, next) => {
     'host',
   )}/auth/confirmemail?token=${confirmEmailToken}`;
 
-  const message = `You are receiving this email because you need to confirm your email address. Because You tried to Signup on the Railway Irctc. Please make a GET request to: \n\n ${confirmEmailURL}`;
+  const message = `You are receiving this email because you need to confirm your email address. Because You tried to Signup on the Bloom. Please make a GET request to: \n\n ${confirmEmailURL}`;
 
   user.save({ validateBeforeSave: false });
 
   const sendResult = await sendEmail({
-    email: user.Email,
-    subject: 'RailwayIrctc Email confirmation token',
+    email: user.email,
+    subject: 'Bloom Email confirmation token',
     message,
   });
 
@@ -43,23 +43,22 @@ exports.register = asyncHandler(async (req, res, next) => {
 // @route     POST /api/v1/auth/login
 // @access    Public
 exports.login = asyncHandler(async (req, res, next) => {
-  const { Email, Password } = req.body;
+  const { email, password } = req.body;
 
   // Validate emil & password
-  if (!Email || !Password) {
+  if (!email || !password) {
     return next(new ErrorResponse('Please provide an email and password', 400));
   }
 
   // Check for user
-  const user = await User.findOne({ Email }).select('+Password');
+  const user = await User.findOne({ email }).select('+password');
 
   if (!user) {
     return next(new ErrorResponse('Invalid credentials', 401));
   }
 
   // Check if password matches
-  const isMatch = await user.matchPassword(Password);
-  console.log(Email, Password);
+  const isMatch = await user.matchPassword(password);
 
   if (!isMatch) {
     return next(new ErrorResponse('Invalid credentials', 401));
@@ -90,7 +89,7 @@ exports.getMe = asyncHandler(async (req, res, next) => {
   // user is already available in req due to the protect middleware
   const user = req.user;
 
-  res.status(200).json({
+  res.render('./pages/Welcome', {
     success: true,
     data: user,
   });
@@ -161,7 +160,7 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
   try {
     await sendEmail({
       email: user.Email,
-      subject: 'Password reset token',
+      subject: 'Bloom Password reset token',
       message,
     });
 
@@ -200,7 +199,7 @@ exports.resetPassword = asyncHandler(async (req, res, next) => {
   }
 
   // Set new password
-  user.Password = req.body.Password;
+  user.password = req.body.password;
   user.resetPasswordToken = undefined;
   user.resetPasswordExpire = undefined;
   await user.save();
@@ -266,8 +265,5 @@ const sendTokenResponse = (user, statusCode, res) => {
     options.secure = true;
   }
 
-  res.status(statusCode).cookie('token', token, options).json({
-    success: true,
-    token,
-  });
+  res.cookie('token', token, options).redirect('./welcome');
 };

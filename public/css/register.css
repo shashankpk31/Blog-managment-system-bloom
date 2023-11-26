@@ -47,7 +47,7 @@ body {
     align-items: center;
 }
 
-.registration-card form input {
+.registration-card form input, select {
     width: 80%;
     max-width: 400px;
     height: 40px;

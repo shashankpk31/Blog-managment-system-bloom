@@ -14,37 +14,34 @@ const user = require("../model/user");
 const router=express.Router();
 const { protect } = require('../middleware/auth');
 
-router.get('/login',(req,res)=>{
-    res.render('./pages/Login');
-})
-
-router.post('/login',(req,res)=>{
-    console.log(req.body);
-    res.redirect('./welcome');
-})
 
 router.get('/registeruser',(req,res)=>{
     res.render('./pages/Register');
 })
 
-router.post('/registeruser',(req,res)=>{
-    console.log(req.body);
-    res.redirect('./login');
+router.post('/registeruser',register)
+
+router.get('/login',(req,res)=>{
+    res.render('./pages/Login');
 })
+
+router.post('/login',login)
 
 router.get('/resetPassword',(req,res)=>{
     res.render('./pages/forgotPassword'); 
 })
 
-router.post('/resetPassword',(req,res)=>{
-    console.log(req.body);
-    res.redirect('./login');
-})
+router.post('/resetPassword',forgotPassword)
 
 
-router.get('/welcome',(req,res)=>{
-    res.render('./pages/Welcome'); 
-})
+router.get('/welcome', protect, getMe)
+
+router.get('/me');
+router.get('/confirmemail', confirmEmail);
+router.put('/updatedetails', protect, updateDetails);
+router.put('/updatepassword', protect, updatePassword);
+router.post('/forgotpassword', );
+router.put('/resetpassword/:resettoken', resetPassword);
 
 
 module.exports=router;

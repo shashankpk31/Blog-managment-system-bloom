@@ -24,13 +24,6 @@ connectDB();
 // for data urlencoded 
 app.use(express.urlencoded({ extended: false }))
 
-//  to save or store some information in the session
-app.use(session({
-    secret: process.env.SECRET,
-    resave: false,
-    saveUninitialized: false
-}));
-
 // to use template engine to render against a get request
 app.set('view engine', 'ejs');
 

@@ -1,18 +1,22 @@
 const mongoose = require("mongoose");
+const crypto=require("crypto");
+const jwt=require("jsonwebtoken");
+const bcrypt = require('bcryptjs');
+
 
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
     },
-    Name: {
+    name: {
         type: String,
         required: [true, 'Please add a name'],
     },
-    Phone_no: {
+    phone_no: {
         type: Number,
         unique: [true, 'Phone_no is already registered']
     },
-    Email: {
+    email: {
         type: String,
         required: [true, 'Please add an email'],
         unique: true,
@@ -21,21 +25,21 @@ const userSchema = new mongoose.Schema({
             'Please add a valid email',
         ]
     },
-    Password: {
+    password: {
         type: String,
         required: [true, 'Please add a password'],
         minlength: 6,
         select: false,
     },
-    DOB: {
+    dob: {
         type: Date
     },
-    Gender: {
+    gender: {
         type: String,
         required: true,
-        enum: ["Male", "Female", "others"]
+        enum: ["male", "female", "others"]
     },
-    Occupation: {
+    occupation: {
         type: String
     },
     role: {
@@ -63,16 +67,13 @@ const userSchema = new mongoose.Schema({
 });
 //Encrypting password using bcrypt
 userSchema.pre('save', async function (next) {
-    // restricting users aged less than 18
-    if (this.getAge(this.DOB) < 18) {
-        next(new ErrorResponse("valid age for registering user is 18 or above here age is" + this.getAge(), 400))
-    }
+    
     //checking if Password is modifide then only this will execute
-    if (!this.isModified('Password')) {
+    if (!this.isModified('password')) {
         next();
     }
     const salt = await bcrypt.genSalt(10);
-    this.Password = await bcrypt.hash(this.Password, salt);
+    this.password = await bcrypt.hash(this.password, salt);
 })
 
 // this will calculate the current age of the user
@@ -90,7 +91,7 @@ userSchema.methods.getSignedJwtToken = function () {
 
 // Match user entered password to hashed password in database
 userSchema.methods.matchPassword = async function (enteredPassword) {
-    return await bcrypt.compare(enteredPassword, this.Password);
+    return await bcrypt.compare(enteredPassword, this.password);
 };
 
 userSchema.methods.getResetPasswordToken = function () {

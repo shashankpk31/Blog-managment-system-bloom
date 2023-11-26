@@ -1,9 +1,12 @@
 <html>
+
 <head>
     <title>Registration Page</title>
-    <link rel="stylesheet" href="https://bloom-pfqg.onrender.com/css/Register.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://bloom-pfqg.onrender.com/css/register.css">
     <link rel="icon" href="https://bloom-pfqg.onrender.com/img/logo.png" type="image/png">
 </head>
+
 <body>
     <div class="container">
         <div class="logo">
@@ -12,14 +15,24 @@
         <div class="registration-card">
             <h2>Register to Bloom</h2>
             <form action="/auth/registeruser" method="post">
+                <input type="text" name="username" placeholder="Username" required>
                 <input type="text" name="name" placeholder="Name" required>
+                <input type="tel" name="phone_no" placeholder="Contact Number" required>
                 <input type="email" name="email" placeholder="Email" required>
                 <input type="password" name="password" placeholder="Password" required>
                 <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+                <input type="date" name="dob" placeholder="Date of Birth" required>
+                <select aria-label="gender" name="gender" >
+                    <option value="male" >Male</option>
+                    <option value="female">Female</option>
+                    <option value="others">Other</option>
+                </select>
+                <input type="text" name="occupation" placeholder="Occupation">
                 <button type="submit">Register</button>
-                <p>Already have an account? <a href="./auth/login">Login here</a></p>
+                <p>Already have an account? <a href="./login">Login here</a></p>
             </form>
         </div>
     </div>
 </body>
+
 </html>
