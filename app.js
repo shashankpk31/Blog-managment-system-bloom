@@ -64,7 +64,7 @@ app.use(helmet());
 app.use(xss());
 
 // Rate limiting
-app.set('trust proxy', true);
+app.set('trust proxy', 'loopback'); // trust the loopback interface
 const limiter = rateLimit({
     windowMs: 10 * 60 * 1000, // 10 mins
     max: 100
