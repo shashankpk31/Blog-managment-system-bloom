@@ -13,8 +13,7 @@ const cors = require('cors');
 const errorHandler = require('./middleware/error');
 const connectDB = require('./config/config.db');
 require('dotenv').config()
-const session = require('express-session');
-const authHandler = require("./routes/auth")
+
 
 const app=express();
 
