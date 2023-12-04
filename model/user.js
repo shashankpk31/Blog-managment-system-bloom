@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
     },
     phone_no: {
         type: Number,
-        unique: [true, 'Phone_no is already registered']
+        unique: [true, 'phone_no is already registered']
     },
     email: {
         type: String,

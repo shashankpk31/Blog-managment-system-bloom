@@ -76,10 +76,7 @@ exports.logout = asyncHandler(async (req, res, next) => {
     httpOnly: true,
   });
 
-  res.status(200).json({
-    success: true,
-    data: {},
-  });
+  res.status(200).redirect('./registeruser');
 });
 
 // @desc      Get current logged in user
@@ -100,10 +97,10 @@ exports.getMe = asyncHandler(async (req, res, next) => {
 // @access    Private
 exports.updateDetails = asyncHandler(async (req, res, next) => {
   let {
-    Phone_no, Nationality, Marital_Status, Occupation
+    phone_no, Nationality, Marital_Status, Occupation
   } = req.body;
   const fieldsToUpdate = {
-    Phone_no, Nationality, Marital_Status, Occupation
+    phone_no, Nationality, Marital_Status, Occupation
   };
 
   const user = await User.findByIdAndUpdate(req.user.id, fieldsToUpdate, {
@@ -128,7 +125,7 @@ exports.updatePassword = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse('Password is incorrect', 401));
   }
 
-  user.Password = req.body.newPassword;
+  user.password = req.body.newPassword;
   await user.save();
 
   sendTokenResponse(user, 200, res);
@@ -139,7 +136,7 @@ exports.updatePassword = asyncHandler(async (req, res, next) => {
 // @access    Public
 exports.forgotPassword = asyncHandler(async (req, res, next) => {
 
-  const user = await User.findOne({ Email: req.body.Email });
+  const user = await User.findOne({ email: req.body.email });
 
   if (!user) {
     return next(new ErrorResponse('There is no user with that email', 404));
@@ -155,16 +152,16 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
     'host',
   )}/auth/resetpassword/${resetToken}`;
 
-  const message = `You are receiving this email because you (or someone else) has requested the reset of a password. Please make a PUT request to: \n\n ${resetUrl}`;
+  const message = `You are receiving this email because you (or someone else) has requested the reset of a password. Please make a GET request to: \n\n ${resetUrl}`;
 
   try {
     await sendEmail({
-      email: user.Email,
+      email: user.email,
       subject: 'Bloom Password reset token',
       message,
     });
 
-    res.status(200).json({ success: true, data: 'Email sent' });
+    res.status(200).render('./pages/forgotPassword',{ success: true, message: 'Email sent' });
   } catch (err) {
     console.log(err);
     user.resetPasswordToken = undefined;
